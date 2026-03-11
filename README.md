@@ -1,17 +1,10 @@
-# my_dolar
+# My Dolar
 
-A new Flutter project.
+Aplicación para ver el precio del dolar en BCV/USDT y el Euro BCV
 
-## Getting Started
+## Caracteristicas
 
-This project is a starting point for a Flutter application.
+Te permite ver el equivalente de cada moneda en las demas monedas con solo ingresar el monto.
 
-A few resources to get you started if this is your first Flutter project:
+No esperes grandes actualizaciones, este es solo un pequeño proyecto personal.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
