@@ -42,3 +42,49 @@ Future<double?> getVesPrice() async {
   }
   return null;
 }
+
+Future<P2PAdData?> getPrecioP2PUSDT({String tradeType = 'venta'}) async {
+  final url = Uri.parse(
+    'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search',
+  );
+
+  final headers = <String, String>{
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0',
+  };
+
+  final body = jsonEncode({
+    'page': 1,
+    'rows': 4,
+    'asset': 'USDT',
+    'fiat': 'VES',
+    'tradeType': tradeType == 'venta' ? 'SELL' : 'BUY',
+    'payTypes': [],
+    'publisherType': null,
+    "merchantCheck": false,
+    "transAmount": "2000",
+  });
+
+  try {
+    final response = await http.post(url, headers: headers, body: body);
+
+    if (response.statusCode != 200) {
+      debugPrint('Error HTTP: ${response.statusCode}');
+      return null;
+    }
+
+    final Map<String, dynamic> jsonMap = jsonDecode(response.body);
+    final binanceResponse = BinanceP2PResponse.fromJson(jsonMap);
+
+    final ads = binanceResponse.data;
+    debugPrint(ads?[2].adv?.price.toString());
+    if (ads != null && ads.length >= 2) {
+      return ads[1];
+    }
+
+    return null;
+  } catch (e) {
+    debugPrint('Error en la petición: $e');
+    return null;
+  }
+}
