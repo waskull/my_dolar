@@ -8,7 +8,7 @@ Te permite ver el equivalente de cada moneda en las demas monedas con solo ingre
 
 No esperes grandes actualizaciones, este es solo un pequeño proyecto personal.
 
-**Hecho con **[Flutter](https://flutter.dev/)
+**Hecho con ** [Flutter](https://flutter.dev/)
 
 <div align="center">
   <a>
