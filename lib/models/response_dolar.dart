@@ -21,8 +21,8 @@ class DolarEuro {
     : fuente = json['fuente']?.toString() ?? 'desconocida',
       nombre = json['nombre']?.toString() ?? 'Sin nombre',
       moneda = json['moneda']?.toString() ?? 'VES',
-      compra = json['compra'], // Dinámico, acepta null
-      venta = json['venta'], // Dinámico, acepta null
+      compra = json['compra'],
+      venta = json['venta'],
       promedio = (json['promedio'] ?? 0.0).toDouble(),
       fechaActualizacion = json['fechaActualizacion'] != null
           ? DateTime.parse(json['fechaActualizacion'])
@@ -78,9 +78,9 @@ class P2PAdData {
 
 class Adv {
   String? advNo;
-  String? tradeType; // SELL, BUY
-  String? asset; // USDT
-  String? fiatUnit; // VES
+  String? tradeType;
+  String? asset;
+  String? fiatUnit;
   String? price;
   String? surplusAmount;
   String? tradableQuantity;
@@ -155,7 +155,7 @@ class Advertiser {
   int? monthOrderCount;
   double? monthFinishRate;
   double? positiveRate;
-  String? userType; // user, merchant
+  String? userType;
   int? userGrade;
 
   Advertiser({
