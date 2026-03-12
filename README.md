@@ -10,6 +10,6 @@ No esperes grandes actualizaciones, este es solo un pequeño proyecto personal.
 
 <div align="center">
   <a>
-    <img src="https://i.ibb.co/WpnVpsVK/Screenshot-20260310-233651.jpg" alt="My_Dolar" width="412px" />
+    <img src="https://i.ibb.co/fVQTygxx/Screenshot-20260312-011859.jpg" alt="My_Dolar" width="412px" />
   </a>
 </div>
