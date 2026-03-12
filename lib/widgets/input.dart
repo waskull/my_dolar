@@ -14,7 +14,7 @@ class ShadcnInput extends StatelessWidget {
     required this.label,
     required this.onChanged,
     this.icon,
-    this.small = false,
+    this.small = true,
     this.suffixText,
   });
 
@@ -23,56 +23,62 @@ class ShadcnInput extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
-      keyboardType:
-          const TextInputType.numberWithOptions(decimal: true),
-      style: TextStyle(
-        fontSize: small ? 14 : 14,
-        color: Colors.white,
-      ),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      style: TextStyle(fontSize: small ? 13 : 14, color: Colors.white),
       decoration: InputDecoration(
+        isDense: true,
         labelText: label,
-        labelStyle:
-            const TextStyle(color: Color(0xFFa1a1aa), fontSize: 14),
+        labelStyle: TextStyle(
+          color: const Color(0xFFa1a1aa),
+          fontSize: small ? 12 : 14,
+        ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         hintText: label,
-        hintStyle:
-            const TextStyle(color: Color(0xFF3f3f46), fontSize: 14),
+        hintStyle: TextStyle(
+          color: const Color(0xFF3f3f46),
+          fontSize: small ? 13 : 14,
+        ),
+
         prefixIcon: icon != null
-            ? Icon(
-                icon,
-                size: 20,
-                color: const Color(0xFFa1a1aa),
-              )
+            ? Icon(icon, size: small ? 16 : 20, color: const Color(0xFFa1a1aa))
             : null,
+
         suffixIcon: suffixText != null
             ? Padding(
-                padding:
-                    const EdgeInsets.only(right: 8, top: 15),
-                child: Text(
-                  suffixText!,
-                  style: const TextStyle(
-                    color: Color(0xFF71717a),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 13,
-                  ),
+                padding: const EdgeInsets.only(right: 12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      suffixText!,
+                      style: TextStyle(
+                        color: const Color(0xFF71717a),
+                        fontWeight: FontWeight.w500,
+                        fontSize: small ? 11 : 13,
+                      ),
+                    ),
+                  ],
                 ),
               )
             : null,
+        suffixIconConstraints: const BoxConstraints(minHeight: 0, minWidth: 0),
+
         filled: true,
         fillColor: const Color(0xFF09090b),
+
         contentPadding: EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: small ? 12 : 12,
+          horizontal: 12,
+          vertical: small ? 10 : 14,
         ),
+
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide:
-              const BorderSide(color: Color(0xFF27272a)),
+          borderRadius: BorderRadius.circular(small ? 6 : 8),
+          borderSide: const BorderSide(color: Color(0xFF27272a)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide:
-              const BorderSide(color: Colors.white, width: 1),
+          borderRadius: BorderRadius.circular(small ? 6 : 8),
+          borderSide: const BorderSide(color: Colors.white, width: 0.8),
         ),
       ),
     );

@@ -263,8 +263,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icons.account_balance_wallet_outlined,
                       onChanged: onChangeBolivar,
                     ),
-                    const SizedBox(height: 32),
-                    const SectionTitle("Tasas de Cambio"),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const SectionTitle("Tasas de Cambio"),
+                        IconButton(
+                          onPressed: _limpiarCampos,
+                          icon: const Icon(
+                            Icons.delete,
+                            size: 20,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
                     const SizedBox(height: 12),
                     PriceCard(
                       title: "Dólar BCV",
