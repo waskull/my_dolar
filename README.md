@@ -8,6 +8,8 @@ Te permite ver el equivalente de cada moneda en las demas monedas con solo ingre
 
 No esperes grandes actualizaciones, este es solo un pequeño proyecto personal.
 
+# Hecho con [Flutter](https://flutter.dev/)
+
 <div align="center">
   <a>
     <img src="https://i.ibb.co/fVQTygxx/Screenshot-20260312-011859.jpg" alt="My_Dolar" width="412px" />
