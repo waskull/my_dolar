@@ -17,13 +17,13 @@ Future<DolarEuro> getDolares() async {
   }
 }
 
-Future<List<DolarEuro>> getEuros() async {
+Future<DolarEuro> getEuros() async {
   final response = await http.get(
-    Uri.parse('https://ve.dolarapi.com/v1/euros'),
+    Uri.parse('https://ve.dolarapi.com/v1/euros/oficial'),
   );
   if (response.statusCode == 200) {
-    List<dynamic> data = json.decode(response.body);
-    return data.map((item) => DolarEuro.fromJson(item)).toList();
+    final dynamic data = json.decode(response.body);
+    return DolarEuro.fromJson(data);
   } else {
     throw Exception('Fallo al traer los euros');
   }

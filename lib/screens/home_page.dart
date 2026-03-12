@@ -16,7 +16,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<DolarEuro> _euros = [];
+  DolarEuro _euros = DolarEuro(
+    promedio: 0,
+    moneda: 'EUR',
+    fuente: 'oficial',
+    nombre: "euro",
+    fechaActualizacion: DateTime.now(),
+  );
   double _monto = 0.0;
   bool _isBolivares = true;
 
@@ -49,14 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   double bolivares = 0.0;
 
-  final TextEditingController bolivarcontroller =
-      TextEditingController(text: "");
-  final TextEditingController bcvcontroller =
-      TextEditingController(text: "");
-  final TextEditingController usdtcontroller =
-      TextEditingController(text: "");
-  final TextEditingController eurocontroller =
-      TextEditingController(text: "");
+  final TextEditingController bolivarcontroller = TextEditingController(
+    text: "",
+  );
+  final TextEditingController bcvcontroller = TextEditingController(text: "");
+  final TextEditingController usdtcontroller = TextEditingController(text: "");
+  final TextEditingController eurocontroller = TextEditingController(text: "");
 
   @override
   void initState() {
@@ -69,15 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
       fechaActualizacion: DateTime.now(),
     );
     _dolarUSDT = _dolar;
-    _euros = [
-      DolarEuro(
-        promedio: 0,
-        moneda: 'EUR',
-        fuente: 'oficial',
-        nombre: "euro",
-        fechaActualizacion: DateTime.now(),
-      ),
-    ];
     _monto = 0.0;
     _isBolivares = true;
     _getData();
@@ -99,14 +94,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _isBolivares = true;
       final monto = double.parse(value);
-      bcvcontroller.text =
-          (monto * _dolar.promedio).toStringAsFixed(2);
-      usdtcontroller.text = (_compraUSDT
-              ? monto * _dolarUSDT.promedio
-              : monto * _dolarUSDTVenta.promedio)
-          .toStringAsFixed(2);
-      eurocontroller.text =
-          (monto * _euros[0].promedio).toStringAsFixed(2);
+      bcvcontroller.text = (monto * _dolar.promedio).toStringAsFixed(2);
+      usdtcontroller.text =
+          (_compraUSDT
+                  ? monto * _dolarUSDT.promedio
+                  : monto * _dolarUSDTVenta.promedio)
+              .toStringAsFixed(2);
+      eurocontroller.text = (monto * _euros.promedio).toStringAsFixed(2);
       _monto = monto;
     });
   }
@@ -119,21 +113,18 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _isBolivares = false;
       double usdtIngresado = double.tryParse(value) ?? 0.0;
-      double tasaUSDT =
-          _compraUSDT ? _dolarUSDT.promedio : _dolarUSDTVenta.promedio;
+      double tasaUSDT = _compraUSDT
+          ? _dolarUSDT.promedio
+          : _dolarUSDTVenta.promedio;
 
       double equivalenteBolivares = usdtIngresado * tasaUSDT;
       _monto = equivalenteBolivares;
-      bolivarcontroller.text =
-          equivalenteBolivares.toStringAsFixed(2);
-      bcvcontroller.text =
-          (equivalenteBolivares / _dolar.promedio).toStringAsFixed(2);
+      bolivarcontroller.text = equivalenteBolivares.toStringAsFixed(2);
+      bcvcontroller.text = (equivalenteBolivares / _dolar.promedio)
+          .toStringAsFixed(2);
 
-      if (_euros.isNotEmpty) {
-        eurocontroller.text =
-            (equivalenteBolivares / _euros[0].promedio)
-                .toStringAsFixed(2);
-      }
+      eurocontroller.text = (equivalenteBolivares / _euros.promedio)
+          .toStringAsFixed(2);
     });
   }
 
@@ -146,18 +137,17 @@ class _MyHomePageState extends State<MyHomePage> {
       _isBolivares = false;
       double euroIngresado = double.tryParse(value) ?? 0.0;
 
-      double equivalenteBolivares =
-          euroIngresado * _euros[0].promedio;
+      double equivalenteBolivares = euroIngresado * _euros.promedio;
       _monto = equivalenteBolivares;
-      bolivarcontroller.text =
-          equivalenteBolivares.toStringAsFixed(2);
-      bcvcontroller.text =
-          (equivalenteBolivares / _dolar.promedio)
-              .toStringAsFixed(2);
-      double tasaUSDT =
-          _compraUSDT ? _dolarUSDT.promedio : _dolarUSDTVenta.promedio;
-      usdtcontroller.text =
-          (equivalenteBolivares / tasaUSDT).toStringAsFixed(2);
+      bolivarcontroller.text = equivalenteBolivares.toStringAsFixed(2);
+      bcvcontroller.text = (equivalenteBolivares / _dolar.promedio)
+          .toStringAsFixed(2);
+      double tasaUSDT = _compraUSDT
+          ? _dolarUSDT.promedio
+          : _dolarUSDTVenta.promedio;
+      usdtcontroller.text = (equivalenteBolivares / tasaUSDT).toStringAsFixed(
+        2,
+      );
     });
   }
 
@@ -169,22 +159,19 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _isBolivares = false;
       double bcvIngresado = double.tryParse(value) ?? 0.0;
-      double equivalenteBolivares =
-          bcvIngresado * _dolar.promedio;
+      double equivalenteBolivares = bcvIngresado * _dolar.promedio;
       _monto = equivalenteBolivares;
-      bolivarcontroller.text =
-          equivalenteBolivares.toStringAsFixed(2);
+      bolivarcontroller.text = equivalenteBolivares.toStringAsFixed(2);
 
-      double tasaUSDT =
-          _compraUSDT ? _dolarUSDT.promedio : _dolarUSDTVenta.promedio;
-      usdtcontroller.text =
-          (equivalenteBolivares / tasaUSDT).toStringAsFixed(2);
+      double tasaUSDT = _compraUSDT
+          ? _dolarUSDT.promedio
+          : _dolarUSDTVenta.promedio;
+      usdtcontroller.text = (equivalenteBolivares / tasaUSDT).toStringAsFixed(
+        2,
+      );
 
-      if (_euros.isNotEmpty) {
-        eurocontroller.text =
-            (equivalenteBolivares / _euros[0].promedio)
-                .toStringAsFixed(2);
-      }
+      eurocontroller.text = (equivalenteBolivares / _euros.promedio)
+          .toStringAsFixed(2);
     });
   }
 
@@ -203,13 +190,10 @@ class _MyHomePageState extends State<MyHomePage> {
       _euros = listaEuros;
 
       final usdtPrecio = double.parse(usdt?.adv?.price ?? "0");
-      final usdtVentaPrecio =
-          double.parse(usdtVenta?.adv?.price ?? "0");
+      final usdtVentaPrecio = double.parse(usdtVenta?.adv?.price ?? "0");
 
-      if (_euros.isNotEmpty) {
-        eurocontroller.text =
-            _euros[0].promedio.toStringAsFixed(2);
-      }
+      eurocontroller.text = _euros.promedio.toStringAsFixed(2);
+
       bcvcontroller.text = _dolar.promedio.toStringAsFixed(2);
       usdtcontroller.text = _compraUSDT
           ? usdtPrecio.toStringAsFixed(2)
@@ -241,10 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         backgroundColor: const Color(0xFF09090b),
         elevation: 0,
@@ -257,10 +238,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(
-            color: Color(0xFF27272a),
-            height: 1,
-          ),
+          child: Divider(color: Color(0xFF27272a), height: 1),
         ),
       ),
       body: cargando
@@ -274,8 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SectionTitle("Conversor Principal"),
                     const SizedBox(height: 12),
@@ -283,8 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       controller: bolivarcontroller,
                       label: "Monto",
                       suffixText: "Bs.",
-                      icon: Icons
-                          .account_balance_wallet_outlined,
+                      icon: Icons.account_balance_wallet_outlined,
                       onChanged: onChangeBolivar,
                     ),
                     const SizedBox(height: 32),
@@ -329,23 +305,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    if (_euros.isNotEmpty)
-                      PriceCard(
-                        title: "Euro BCV",
-                        priceCompra: _euros[0].promedio,
-                        priceVenta: _dolarUSDTVenta.promedio,
-                        date: _euros[0].fechaActualizacion,
-                        controller: eurocontroller,
-                        onChanged: onChangeEuro,
-                        inDolar: _monto,
-                        isEuro: true,
-                        isCompra: false,
-                        isBolivares: _isBolivares,
-                        monto: _monto,
-                        compraUSDT: _compraUSDT,
-                        bolivarController: bolivarcontroller,
-                        onChangeBolivar: onChangeBolivar,
-                      ),
+                    PriceCard(
+                      title: "Euro BCV",
+                      priceCompra: _euros.promedio,
+                      priceVenta: _dolarUSDTVenta.promedio,
+                      date: _euros.fechaActualizacion,
+                      controller: eurocontroller,
+                      onChanged: onChangeEuro,
+                      inDolar: _monto,
+                      isEuro: true,
+                      isCompra: false,
+                      isBolivares: _isBolivares,
+                      monto: _monto,
+                      compraUSDT: _compraUSDT,
+                      bolivarController: bolivarcontroller,
+                      onChangeBolivar: onChangeBolivar,
+                    ),
                   ],
                 ),
               ),
